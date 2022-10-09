@@ -5,11 +5,13 @@ return require('packer').startup(function(use)
 	use 'nvim-lua/popup.nvim'
 	use 'nvim-telescope/telescope.nvim'
 	use('nvim-treesitter/nvim-treesitter', { run = ":TSUpdate" })
+	use "Pocco81/auto-save.nvim"
 
 	-- lsp
 	use 'neovim/nvim-lspconfig'
 	use 'hrsh7th/cmp-nvim-lsp'
 	use 'hrsh7th/cmp-buffer'
+	use 'hrsh7th/cmp-path'
 	use 'hrsh7th/nvim-cmp'
 	use 'williamboman/nvim-lsp-installer'
 	use 'L3MON4D3/LuaSnip'
@@ -17,12 +19,7 @@ return require('packer').startup(function(use)
 
 	use {
 		"catppuccin/nvim",
-		as = "catppuccin",
-		config = function()
-			vim.g.catppuccin_flavour = "macchiato" -- latte, frappe, macchiato, mocha
-			require("catppuccin").setup()
-			vim.api.nvim_command "colorscheme catppuccin"
-		end
+		as = "catppuccin"
 	}
 	use {
 		'nvim-lualine/lualine.nvim',

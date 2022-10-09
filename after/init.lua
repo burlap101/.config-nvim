@@ -1,3 +1,18 @@
+local autocmd = vim.api.nvim_create_autocmd
+local augroup = vim.api.nvim_create_augroup
+local yank_group = augroup('HighlightYank', {})
+--
+autocmd('TextYankPost', {
+	group = yank_group,
+	pattern = '*',
+	callback = function()
+		vim.highlight.on_yank({
+			higroup = 'IncSearch',
+			timeout = 40,
+		})
+	end,
+})
+
 local nnoremap = function(lhs, rhs, opts)
 	vim.keymap.set('n', lhs, rhs, opts or {} )
 end
@@ -19,3 +34,5 @@ end)
 nnoremap("<leader>pk", function()
 	telescope_builtin.keymaps()
 end)
+
+

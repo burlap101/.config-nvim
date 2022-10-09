@@ -1,1 +1,6 @@
+require('joecrowley.keymap')
 require('joecrowley.packer')
+require('joecrowley.catppuccin')
+require('joecrowley.lsp')
+require('joecrowley.autosave')
+require('joecrowley.cmp')
