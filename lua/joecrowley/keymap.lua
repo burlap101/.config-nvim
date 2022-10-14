@@ -8,18 +8,11 @@ vim.keymap.set('n', "<leader>-", vim.cmd("vertical resize -5"))
 vim.keymap.set('n', "<leader>zz", function()
 	return vim.api.nvim_buf_delete(0,{})
 end)
---vim.keymap.set('n', "<leader>bf", vim.cmd("bf"))
---vim.keymap.set('n', "<leader>bl", vim.cmd("bl"))
---vim.keymap.set('n', "<leader>bn", vim.cmd("bn"))
---vim.keymap.set('n', "<leader>bp", vim.cmd("bp"))
---
----- vim.keymap.set('n', "<leader>gj", vim.cmd("diffget //3"))
----- vim.keymap.set('n', "<leader>gf", vim.cmd("diffget //2"))
-----
+
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 local yank_group = augroup('HighlightYank', {})
---
+
 autocmd('TextYankPost', {
 	group = yank_group,
 	pattern = '*',
@@ -35,14 +28,29 @@ local nnoremap = function(lhs, rhs, opts)
 	vim.keymap.set('n', lhs, rhs, opts or {})
 end
 
+-- Fugitive
+nnoremap("<leader>gj", function()
+	vim.cmd("diffget //3")
+end)
+nnoremap("<leader>gf", function()
+	vim.cmd("diffget //2")
+end)
+
+-- Telescope
 local telescope_builtin = require('telescope.builtin')
 
 nnoremap("<C-p>", function()
-	telescope_builtin.git_files()
+	telescope_builtin.git_files({
+		show_untracked = true
+	})
 end)
 
 nnoremap("<leader>pf", function()
-	telescope_builtin.find_files()
+	telescope_builtin.find_files({
+		hidden = true,
+		no_ignore = true,
+		no_ignore_parent = true
+	})
 end)
 
 nnoremap("<leader>ps", function()
@@ -51,4 +59,14 @@ end)
 
 nnoremap("<leader>pk", function()
 	telescope_builtin.keymaps()
+end)
+
+nnoremap("<leader>pt", function()
+	telescope_builtin.buffers()
+end)
+
+nnoremap("<leader>pd", function()
+	telescope_builtin.diagnostics({
+		bufnr = 0
+	})
 end)

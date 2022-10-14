@@ -1,6 +1,7 @@
 return require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim'
-	use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
+	--use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
+	use 'tpope/vim-fugitive'
 	use 'nvim-lua/plenary.nvim'
 	use 'nvim-lua/popup.nvim'
 	use 'nvim-telescope/telescope.nvim'
@@ -21,6 +22,8 @@ return require('packer').startup(function(use)
 		"catppuccin/nvim",
 		as = "catppuccin"
 	}
+
+	use 'folke/tokyonight.nvim'
 	use {
 		'nvim-lualine/lualine.nvim',
 		requires = { 'kyazdani42/nvim-web-devicons', opt = true }
