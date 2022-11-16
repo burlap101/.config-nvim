@@ -70,3 +70,59 @@ nnoremap("<leader>pd", function()
 		bufnr = 0
 	})
 end)
+
+nnoremap("<leader>pq", function()
+	telescope_builtin.quickfix()
+end)
+
+nnoremap("<leader>ph", function()
+	telescope_builtin.help_tags()
+end)
+
+local dap = require('dap')
+
+nnoremap("<leader>b", function()
+	dap.toggle_breakpoint()
+end)
+
+nnoremap("<leader>B", function()
+	dap.clear_breakpoints()
+end)
+
+nnoremap("<F5>", function()
+	dap.continue()
+end)
+
+nnoremap("<F6>", function()
+	dap.step_over()
+end)
+
+nnoremap("<F7>", function()
+	dap.step_into()
+end)
+
+nnoremap("<F8>", function()
+	dap.step_out()
+end)
+
+nnoremap("<F4>", function()
+	dap.terminate()
+end)
+
+-- autobracketing hack
+
+--local inoremap = function(lhs, rhs, opts)
+--	opts = opts or {}
+--	vim.keymap.set('i', lhs, rhs, opts)
+--end
+--
+--inoremap("(", "()<left>")
+--inoremap("[", "[]<left>")
+--inoremap("{", "{}<left>")
+--inoremap("'", "''<left>")
+--inoremap("`", "``<left>")
+--inoremap('"', '""<left>')
+
+
+
+
