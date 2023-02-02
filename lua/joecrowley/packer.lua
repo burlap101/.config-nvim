@@ -17,6 +17,7 @@ return require('packer').startup(function(use)
 	use 'williamboman/nvim-lsp-installer'
 	use 'L3MON4D3/LuaSnip'
 	use 'saadparwaiz1/cmp_luasnip'
+	use('leafOfTree/vim-svelte-plugin', { run = ":TSInstall css" })
 
 	use {
 		"catppuccin/nvim",
@@ -28,6 +29,8 @@ return require('packer').startup(function(use)
 		'nvim-lualine/lualine.nvim',
 		requires = { 'kyazdani42/nvim-web-devicons', opt = true }
 	}
+
+	use({'scalameta/nvim-metals', requires = { "nvim-lua/plenary.nvim" }})
 
 	-- DAP
 	use 'mfussenegger/nvim-dap'

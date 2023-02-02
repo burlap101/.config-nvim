@@ -8,6 +8,9 @@ vim.keymap.set('n', "<leader>-", vim.cmd("vertical resize -5"))
 vim.keymap.set('n', "<leader>zz", function()
 	return vim.api.nvim_buf_delete(0,{})
 end)
+vim.keymap.set('n', "<leader>n", function()
+	return vim.cmd("Explore")
+end)
 
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup

@@ -1,3 +1,7 @@
+local function proj_path()
+	return vim.fn.expand('%:h')
+end
+
 require('lualine').setup {
 	options = {
 		icons_enabled = true,
@@ -20,7 +24,7 @@ require('lualine').setup {
 	sections = {
 		lualine_a = { 'mode' },
 		lualine_b = { 'branch', 'diff', 'diagnostics' },
-		lualine_c = { 'filename' },
+		lualine_c = { proj_path, 'filename' },
 		lualine_x = { 'encoding', 'fileformat', 'filetype' },
 		lualine_y = { 'progress' },
 		lualine_z = { 'location' }
