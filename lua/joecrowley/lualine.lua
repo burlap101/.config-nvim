@@ -2,6 +2,10 @@ local function proj_path()
 	return vim.fn.expand('%:h')
 end
 
+local function metals_status()
+	return vim.g['metals_status']
+end
+
 require('lualine').setup {
 	options = {
 		icons_enabled = true,
@@ -25,7 +29,7 @@ require('lualine').setup {
 		lualine_a = { 'mode' },
 		lualine_b = { 'branch', 'diff', 'diagnostics' },
 		lualine_c = { proj_path, 'filename' },
-		lualine_x = { 'encoding', 'fileformat', 'filetype' },
+		lualine_x = { metals_status, 'encoding', 'fileformat', 'filetype' },
 		lualine_y = { 'progress' },
 		lualine_z = { 'location' }
 	},

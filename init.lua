@@ -31,7 +31,7 @@ vim.opt.cmdheight = 1
 
 vim.opt.colorcolumn = "100"
 
-vim.g.mapleader = ' '
+vim.g.mapleader = " "
 --
 
 require('joecrowley')

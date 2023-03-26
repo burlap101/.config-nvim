@@ -1,7 +1,2 @@
-local status_ok, _ = pcall(require, "lspconfig")
-if not status_ok then
-  return
-end
-
-require("joecrowley.lsp.lsp-installer")
-require("joecrowley.lsp.handlers").setup()
+require("joecrowley.lsp.config")
+require("joecrowley.lsp.metals")
