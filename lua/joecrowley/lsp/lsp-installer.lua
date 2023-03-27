@@ -35,6 +35,11 @@ lsp_installer.on_server_ready(function(server)
 		local svelte_opts = require("joecrowley.lsp.settings.svelte")
 		opts = vim.tbl_deep_extend("force", svelte_opts, opts)
 	end
+
+	if server.name == "hls" then
+		local hls_opts = require("joecrowley.lsp.settings.hls")
+		opt = vim.tbl_deep_extend("force", hls_opts, opts)
+	end
 	-- This setup() function is exactly the same as lspconfig's setup function.
 	-- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 	server:setup(opts)
