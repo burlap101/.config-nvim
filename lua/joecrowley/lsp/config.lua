@@ -1,5 +1,6 @@
 -- Setup language servers.
 local lspconfig = require('lspconfig')
+local vim = vim
 
 lspconfig.gopls.setup {
 	cmd = { "gopls", "serve" },
@@ -10,18 +11,14 @@ lspconfig.hls.setup {
 		formattingProvider = "fourmolu"
 	},
 }
-lspconfig.denols.setup {
-	root_dir = vim.fs.dirname(vim.fs.find({ 'deno.json', 'deno.jsonc' }, { upward = true })[1]),
-	init_options = {
-		lint = true,
-	},
-}
-lspconfig.rome.setup {
-	root_dir = vim.fs.dirname(vim.fs.find({ 'package.json' }, { upward = true })[1]),
-	init_options = {
-		lint = true,
-	},
-}
+-- lspconfig.denols.setup {
+-- 	root_dir = vim.fs.dirname(vim.fs.find({ 'deno.json', 'deno.jsonc' }, { upward = true })[1]),
+-- 	init_options = {
+-- 		lint = true,
+-- 	},
+-- }
+lspconfig.rome.setup {}
+lspconfig.svelte.setup {}
 lspconfig.sumneko_lua.setup {
 	settings = {
 		Lua = {
@@ -31,6 +28,8 @@ lspconfig.sumneko_lua.setup {
 		},
 	},
 }
+lspconfig.pylsp.setup {}
+lspconfig.tailwindcss.setup {}
 
 -- SVELTE GLOBAL
 vim.g.vim_svelte_plugin_use_typescript = 1
