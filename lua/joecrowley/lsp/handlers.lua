@@ -4,9 +4,9 @@ local M = {}
 M.setup = function()
 	local signs = {
 		{ name = "DiagnosticSignError", text = "" },
-		{ name = "DiagnosticSignWarn", text = "" },
-		{ name = "DiagnosticSignHint", text = "" },
-		{ name = "DiagnosticSignInfo", text = "" },
+		{ name = "DiagnosticSignWarn",  text = "" },
+		{ name = "DiagnosticSignHint",  text = "" },
+		{ name = "DiagnosticSignInfo",  text = "" },
 	}
 
 	for _, sign in ipairs(signs) do
@@ -62,29 +62,35 @@ local function lsp_highlight_document(client)
 end
 
 local function lsp_keymaps(bufnr)
-    local opts = { buffer = bufnr }
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
-    vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
-    vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
-    vim.keymap.set('n', '<leader>wl', function()
-      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, opts)
-    vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
-    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
-    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-    vim.keymap.set('n', '<leader>ff', function()
-      vim.lsp.buf.format({ async = true })
-    end, opts)
+	-- Global mappings.
+	-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+	vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
+	vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+	vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+	vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
+	local opts = { buffer = bufnr }
+	vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+	vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+	vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+	vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+	vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+	vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
+	vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
+	vim.keymap.set('n', '<leader>wl', function()
+		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+	end, opts)
+	vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
+	vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+	vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
+	vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+	vim.keymap.set('n', '<leader>ff', function()
+		vim.lsp.buf.format({ async = true })
+	end, opts)
 end
 
 M.on_attach = function(client, bufnr)
 	if client.name == "tsserver" then
-	-- 	-- TODO: UPDATE to use server_capabilities
+		-- 	-- TODO: UPDATE to use server_capabilities
 		client.server_capabilities.document_formatting = false
 	end
 	lsp_keymaps(bufnr)

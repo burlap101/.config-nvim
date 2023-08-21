@@ -1,5 +1,6 @@
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
+local buf_set_option = vim.api.nvim_buf_set_option
 local yank_group = augroup('HighlightYank', {})
 --
 autocmd('TextYankPost', {
@@ -12,6 +13,7 @@ autocmd('TextYankPost', {
 		})
 	end,
 })
+
 
 local nnoremap = function(lhs, rhs, opts)
 	vim.keymap.set('n', lhs, rhs, opts or {} )

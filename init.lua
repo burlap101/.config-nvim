@@ -19,7 +19,7 @@ vim.opt.signcolumn = "yes"
 vim.opt.list = true
 vim.opt.listchars = {
 	tab = "| ",
-	multispace = "   |"
+	multispace = "|   "
 }
 vim.opt.scrolloff = 8
 vim.opt.hlsearch = false
@@ -31,7 +31,7 @@ vim.opt.cmdheight = 1
 
 vim.opt.colorcolumn = "100"
 
-vim.g.mapleader = ' '
+vim.g.mapleader = " "
 --
 
 require('joecrowley')

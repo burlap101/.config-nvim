@@ -7,4 +7,4 @@ require('joecrowley.cmp')
 require('joecrowley.lualine')
 require('joecrowley.treesitter')
 require('joecrowley.dap')
-require('joecrowley.svelte')
+
