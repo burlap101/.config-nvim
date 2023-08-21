@@ -28,8 +28,8 @@ lspconfig.sumneko_lua.setup {
 		},
 	},
 }
-lspconfig.pylsp.setup {}
 lspconfig.tailwindcss.setup {}
+lspconfig.pylsp.setup {}
 
 -- SVELTE GLOBAL
 vim.g.vim_svelte_plugin_use_typescript = 1
