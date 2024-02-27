@@ -1,5 +1,5 @@
+require('joecrowley.lazy')
 require('joecrowley.keymap')
-require('joecrowley.packer')
 require('joecrowley.themes')
 require('joecrowley.lsp')
 require('joecrowley.autosave')
