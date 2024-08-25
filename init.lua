@@ -1,3 +1,4 @@
+local vim = vim
 vim.opt.exrc = true
 vim.opt.errorbells = false
 vim.opt.tabstop = 4

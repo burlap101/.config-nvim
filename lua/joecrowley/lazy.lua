@@ -1,6 +1,5 @@
 
 require("lazy").setup({
-	'wbthomason/packer.nvim',
 	{ 'TimUntersberger/neogit', dependencies = 'nvim-lua/plenary.nvim' },
 	'tpope/vim-fugitive',
 	'nvim-lua/plenary.nvim',

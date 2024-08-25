@@ -17,19 +17,32 @@ lspconfig.hls.setup {
 -- 		lint = true,
 -- 	},
 -- }
+lspconfig.efm.setup {
+	settings = {
+		rootMarkers = {".git/"},
+		languages = {
+			python = {
+				{
+					lintCommand = "flake8 --stdin-display-name ${INPUT} -",
+					lintStdin = true,
+					lintFormats = {"%f:%l:%c: %m"},
+				},
+				{
+					lintCommand = "mypy --show-column-numbers",
+					lintFormats = {
+						"%f:%l:%c: %trror: %m",
+						"%f:%l:%c: %tarning: %m",
+						"%f:%l:%c: %tote: %m",
+					}
+				}
+			}
+		}
+	}
+}
 lspconfig.rome.setup {}
 lspconfig.svelte.setup {}
-lspconfig.sumneko_lua.setup {
-	settings = {
-		Lua = {
-			runtime = {
-				version = _VERSION,
-			},
-		},
-	},
-}
+lspconfig.lua_ls.setup{}
 lspconfig.tailwindcss.setup {}
-lspconfig.pylsp.setup {}
 
 -- SVELTE GLOBAL
 vim.g.vim_svelte_plugin_use_typescript = 1
