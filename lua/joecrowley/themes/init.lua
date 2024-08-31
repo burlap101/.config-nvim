@@ -1,1 +1,1 @@
-require('joecrowley.themes.tokyonight')
+require('joecrowley.themes.rose-pine')

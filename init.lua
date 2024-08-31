@@ -30,7 +30,7 @@ vim.opt.wildignore = vim.opt.wildignore + { "*.pyc", "node_modules" }
 vim.opt.updatetime = 50
 vim.opt.cmdheight = 1
 
-vim.opt.colorcolumn = "100"
+vim.opt.colorcolumn = "120"
 
 vim.g.mapleader = " "
 

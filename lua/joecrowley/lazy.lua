@@ -17,13 +17,14 @@ require("lazy").setup({
 	'williamboman/nvim-lsp-installer',
 	'L3MON4D3/LuaSnip',
 	'saadparwaiz1/cmp_luasnip',
-	{'leafOfTree/vim-svelte-plugin', run = ":TSInstall css"}, 
+	{'leafOfTree/vim-svelte-plugin', run = ":TSInstall css"},
 
 	'folke/tokyonight.nvim',
 	{
 		'nvim-lualine/lualine.nvim',
 		dependencies = { 'kyazdani42/nvim-web-devicons', opt = true }
 	},
+	{ 'rose-pine/neovim', name = 'rose-pine' },
 	-- DAP
 	'mfussenegger/nvim-dap',
 	'rcarriga/nvim-dap-ui',

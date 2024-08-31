@@ -17,15 +17,32 @@ lspconfig.hls.setup {
 -- 		lint = true,
 -- 	},
 -- }
-lspconfig.efm.setup {
+lspconfig.pylsp.setup {
 	settings = {
-		rootMarkers = {".git/"},
+		pylsp = {
+			plugins = {
+				pylint = { enabled = false },
+				pyflakes = { enabled = false },
+				pycodestyle = { enabled = false },
+				yapf = { enabled = false },
+			}
+		}
+	}
+}
+lspconfig.efm.setup {
+	init_options = { documentFormatting = true },
+	settings = {
+		rootMarkers = { ".venv/", ".git/" },
 		languages = {
 			python = {
 				{
+					formatCommand = "yapf --quiet",
+					formatStdin = true,
+				},
+				{
 					lintCommand = "flake8 --stdin-display-name ${INPUT} -",
 					lintStdin = true,
-					lintFormats = {"%f:%l:%c: %m"},
+					lintFormats = { "%f:%l:%c: %m" },
 				},
 				{
 					lintCommand = "mypy --show-column-numbers",
@@ -34,18 +51,19 @@ lspconfig.efm.setup {
 						"%f:%l:%c: %tarning: %m",
 						"%f:%l:%c: %tote: %m",
 					}
-				}
+				},
 			}
 		}
 	}
 }
 lspconfig.rome.setup {}
 lspconfig.svelte.setup {}
-lspconfig.lua_ls.setup{}
+lspconfig.lua_ls.setup {}
 lspconfig.tailwindcss.setup {}
 
 -- SVELTE GLOBAL
 vim.g.vim_svelte_plugin_use_typescript = 1
+
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions

@@ -81,6 +81,9 @@ end)
 nnoremap("<leader>ph", function()
 	telescope_builtin.help_tags()
 end)
+nnoremap("<leader>pn", function()
+	telescope_builtin.current_buffer_fuzzy_find()
+end)
 
 local dap = require('dap')
 
