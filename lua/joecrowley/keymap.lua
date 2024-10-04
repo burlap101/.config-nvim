@@ -1,3 +1,5 @@
+local vim = vim
+
 -- vim.keymap.set('n', "<leader>u", vim.cmd("UndotreeShow"))
 vim.keymap.set('n', "Y", "y$")
 vim.keymap.set({ 'n', 'v' }, "<leader>y", "\"+y")
@@ -114,6 +116,7 @@ end)
 nnoremap("<F4>", function()
 	dap.terminate()
 end)
+
 
 -- autobracketing hack
 

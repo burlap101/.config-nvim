@@ -1,9 +1,18 @@
+local vim = vim
+local tree_sitter = require('nvim-treesitter')
+
 local function proj_path()
 	return vim.fn.expand('%:h')
 end
 
 local function metals_status()
 	return vim.g['metals_status']
+end
+
+local function tree_sitter_status()
+	return tree_sitter.statusline({
+		separator = ' 󰁕 '
+	})
 end
 
 require('lualine').setup {
@@ -29,7 +38,7 @@ require('lualine').setup {
 		lualine_a = { 'mode' },
 		lualine_b = { 'branch', 'diff', 'diagnostics' },
 		lualine_c = { proj_path, 'filename' },
-		lualine_x = { metals_status, 'encoding', 'fileformat', 'filetype' },
+		lualine_x = { tree_sitter_status, 'filetype' },
 		lualine_y = { 'progress' },
 		lualine_z = { 'location' }
 	},

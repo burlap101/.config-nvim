@@ -17,33 +17,37 @@ lspconfig.hls.setup {
 -- 		lint = true,
 -- 	},
 -- }
-lspconfig.pylsp.setup {
+-- lspconfig.pylsp.setup {
+-- 	settings = {
+-- 		pylsp = {
+-- 			plugins = {
+-- 				pylint = { enabled = false },
+-- 				pyflakes = { enabled = false },
+-- 				pycodestyle = { enabled = false },
+-- 				yapf = { enabled = false },
+-- 			}
+-- 		}
+-- 	}
+-- }
+lspconfig.pyright.setup {
 	settings = {
-		pylsp = {
-			plugins = {
-				pylint = { enabled = false },
-				pyflakes = { enabled = false },
-				pycodestyle = { enabled = false },
-				yapf = { enabled = false },
-			}
-		}
-	}
+		pyright = {
+			disableOrganizeImports = true,
+		},
+		python = {
+			analysis = {
+				ignore = { '*' },
+			},
+		},
+	},
 }
+
 lspconfig.efm.setup {
 	init_options = { documentFormatting = true },
 	settings = {
 		rootMarkers = { ".venv/", ".git/" },
 		languages = {
 			python = {
-				{
-					formatCommand = "yapf --quiet",
-					formatStdin = true,
-				},
-				{
-					lintCommand = "flake8 --stdin-display-name ${INPUT} -",
-					lintStdin = true,
-					lintFormats = { "%f:%l:%c: %m" },
-				},
 				{
 					lintCommand = "mypy --show-column-numbers",
 					lintFormats = {
@@ -56,10 +60,20 @@ lspconfig.efm.setup {
 		}
 	}
 }
-lspconfig.rome.setup {}
+lspconfig.jsonls.setup {}
 lspconfig.svelte.setup {}
 lspconfig.lua_ls.setup {}
 lspconfig.tailwindcss.setup {}
+lspconfig.volar.setup {}
+lspconfig.tsserver.setup {}
+lspconfig.ruff.setup {
+	init_options = {
+		settings = {
+			configuration = "pyproject.toml",
+			configurationPreferences = "filesystemFirst",
+		}
+	}
+}
 
 -- SVELTE GLOBAL
 vim.g.vim_svelte_plugin_use_typescript = 1

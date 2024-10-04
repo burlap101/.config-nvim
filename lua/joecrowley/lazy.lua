@@ -6,7 +6,9 @@ require("lazy").setup({
 	'nvim-lua/popup.nvim',
 	'nvim-telescope/telescope.nvim',
 	{'nvim-treesitter/nvim-treesitter', build = ":TSUpdate" },
-	"Pocco81/auto-save.nvim",
+	'nvim-treesitter/playground',
+	'p00f/nvim-ts-rainbow',
+	'Pocco81/auto-save.nvim',
 --
 --	-- lsp
 	'neovim/nvim-lspconfig',
@@ -25,9 +27,12 @@ require("lazy").setup({
 		dependencies = { 'kyazdani42/nvim-web-devicons', opt = true }
 	},
 	{ 'rose-pine/neovim', name = 'rose-pine' },
+
 	-- DAP
 	'mfussenegger/nvim-dap',
-	'rcarriga/nvim-dap-ui',
+	'mfussenegger/nvim-dap-python',
+	{'rcarriga/nvim-dap-ui', dependencies = {'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio'}},
 	'theHamsta/nvim-dap-virtual-text',
 	'leoluz/nvim-dap-go',
+	{'folke/neodev.nvim', opts = {}}, -- provides type checking for dap
 })

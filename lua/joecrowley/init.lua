@@ -1,4 +1,5 @@
 require('joecrowley.lazy')
+require('joecrowley.filetypes')
 require('joecrowley.keymap')
 require('joecrowley.themes')
 require('joecrowley.lsp')
@@ -6,5 +7,5 @@ require('joecrowley.autosave')
 require('joecrowley.cmp')
 require('joecrowley.lualine')
 require('joecrowley.treesitter')
--- require('joecrowley.dap')
+require('joecrowley.dap')
 
