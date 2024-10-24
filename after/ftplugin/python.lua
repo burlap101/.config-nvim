@@ -1,3 +1,6 @@
+vim.opt_local.expandtab = true
+vim.opt_local.shiftwidth = 4
+
 -- Debugging setup
 local dap_python = require('dap-python')
 

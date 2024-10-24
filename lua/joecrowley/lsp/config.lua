@@ -17,18 +17,6 @@ lspconfig.hls.setup {
 -- 		lint = true,
 -- 	},
 -- }
--- lspconfig.pylsp.setup {
--- 	settings = {
--- 		pylsp = {
--- 			plugins = {
--- 				pylint = { enabled = false },
--- 				pyflakes = { enabled = false },
--- 				pycodestyle = { enabled = false },
--- 				yapf = { enabled = false },
--- 			}
--- 		}
--- 	}
--- }
 lspconfig.pyright.setup {
 	settings = {
 		pyright = {
