@@ -5,8 +5,12 @@ vim.keymap.set('n', "Y", "y$")
 vim.keymap.set({ 'n', 'v' }, "<leader>y", "\"+y")
 vim.keymap.set('n', "<leader>Y", '"+yy')
 vim.keymap.set('n', "<leader>p", '"+p')
-vim.keymap.set('n', "<leader>+", vim.cmd("vertical resize +5"))
-vim.keymap.set('n', "<leader>-", vim.cmd("vertical resize -5"))
+vim.keymap.set('n', "<leader>+", function()
+	vim.cmd("vertical resize +5")
+end)
+vim.keymap.set('n', "<leader>-", function()
+	vim.cmd("vertical resize -5")
+end)
 vim.keymap.set('n', "<leader>zz", function()
 	return vim.api.nvim_buf_delete(0,{})
 end)
@@ -32,6 +36,11 @@ autocmd('TextYankPost', {
 local nnoremap = function(lhs, rhs, opts)
 	vim.keymap.set('n', lhs, rhs, opts or {})
 end
+
+-- Delete all buffers except current
+nnoremap("<leader>bo", function()
+	vim.cmd("%bdelete!|edit #|normal `")
+end)
 
 -- Fugitive
 nnoremap("<leader>gj", function()
