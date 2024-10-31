@@ -30,24 +30,25 @@ lspconfig.pyright.setup {
     },
 }
 
-lspconfig.efm.setup {
-    init_options = { documentFormatting = true },
-    settings = {
-        rootMarkers = { ".venv/", ".git/" },
-        languages = {
-            python = {
-                {
-                    lintCommand = "mypy --show-column-numbers",
-                    lintFormats = {
-                        "%f:%l:%c: %trror: %m",
-                        "%f:%l:%c: %tarning: %m",
-                        "%f:%l:%c: %tote: %m",
-                    }
-                },
-            }
-        }
-    }
-}
+-- lspconfig.efm.setup {
+--     init_options = { documentFormatting = false },
+--     settings = {
+--         rootMarkers = { ".venv/", ".git/" },
+--         languages = {
+--             python = {
+--                 {
+--                     lintCommand = "mypy --show-column-numbers",
+--                     lintFormats = {
+--                         "%f:%l:%c: %trror: %m",
+--                         "%f:%l:%c: %tarning: %m",
+--                         "%f:%l:%c: %tote: %m",
+--                     },
+-- 					lintDebounce = "15s",
+--                 },
+--             }
+--         }
+--     }
+-- }
 lspconfig.jsonls.setup {}
 lspconfig.svelte.setup {}
 lspconfig.lua_ls.setup {
