@@ -93,6 +93,7 @@ cmp.setup {
 		}),
 	},
 	formatting = {
+
 		fields = { "kind", "abbr", "menu" },
 		format = function(entry, vim_item)
 			-- Kind icons
