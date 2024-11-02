@@ -1,6 +1,6 @@
 local auto_save = require "auto-save"
 
-local excluded_filetypes = {"gitrebase", "gitcommit"}
+local excluded_filetypes = {"gitrebase", "gitcommit", "oil"}
 
 auto_save.setup({
 	condition = function(buf)

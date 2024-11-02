@@ -1,5 +1,8 @@
 require("lazy").setup({
-	{ 'TimUntersberger/neogit',          dependencies = 'nvim-lua/plenary.nvim' },
+	{
+		'TimUntersberger/neogit',
+		dependencies = 'nvim-lua/plenary.nvim'
+	},
 	'tpope/vim-fugitive',
 	'nvim-lua/plenary.nvim',
 	'nvim-lua/popup.nvim',
@@ -8,8 +11,17 @@ require("lazy").setup({
 	'nvim-treesitter/playground',
 	'p00f/nvim-ts-rainbow',
 	'Pocco81/auto-save.nvim',
-	--
-	--	-- lsp and cmp
+	{
+		'stevearc/oil.nvim',
+		---@module 'oil'
+		---@type oil.SetupOpts
+		opts = {},
+		-- Optional dependencies
+		dependencies = { { "echasnovski/mini.icons", opts = {} } },
+		-- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
+	},
+
+	-- lsp and cmp
 	'neovim/nvim-lspconfig',
 	{
 		'hrsh7th/nvim-cmp',
@@ -23,7 +35,7 @@ require("lazy").setup({
 		}
 	},
 	'williamboman/nvim-lsp-installer',
-	{ 'leafOfTree/vim-svelte-plugin', run = ":TSInstall css" },
+	{ 'leafOfTree/vim-svelte-plugin',    run = ":TSInstall css" },
 
 
 	-- Themes
@@ -32,7 +44,7 @@ require("lazy").setup({
 		'nvim-lualine/lualine.nvim',
 		dependencies = { 'kyazdani42/nvim-web-devicons', opt = true }
 	},
-	{ 'rose-pine/neovim',             name = 'rose-pine' },
+	{ 'rose-pine/neovim',     name = 'rose-pine' },
 
 	-- DAP
 	'mfussenegger/nvim-dap',
@@ -40,7 +52,7 @@ require("lazy").setup({
 	{ 'rcarriga/nvim-dap-ui', dependencies = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' } },
 	'theHamsta/nvim-dap-virtual-text',
 	'leoluz/nvim-dap-go',
-	{ 'folke/neodev.nvim',    opts = {} }, -- provides type checking for dap
+	{ 'folke/neodev.nvim', opts = {} }, -- provides type checking for dap
 
 	-- LLM
 	{

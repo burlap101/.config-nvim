@@ -12,7 +12,7 @@ vim.keymap.set('n', "<leader>-", function()
 	vim.cmd("vertical resize -5")
 end)
 vim.keymap.set('n', "<leader>zz", function()
-	return vim.api.nvim_buf_delete(0,{})
+	return vim.api.nvim_buf_delete(0, {})
 end)
 vim.keymap.set('n', "<leader>n", function()
 	return vim.cmd("Explore")
@@ -49,6 +49,15 @@ end)
 nnoremap("<leader>gf", function()
 	vim.cmd("diffget //2")
 end)
+
+-- Oil.nvim
+nnoremap(
+	"-",
+	function()
+		vim.cmd("Oil")
+	end,
+	{ desc = "Open parent directory" }
+)
 
 -- Telescope
 local telescope_builtin = require('telescope.builtin')
@@ -96,6 +105,7 @@ nnoremap("<leader>pn", function()
 	telescope_builtin.current_buffer_fuzzy_find()
 end)
 
+-- DAP
 local dap = require('dap')
 
 nnoremap("<leader>b", function()
@@ -140,7 +150,3 @@ end)
 --inoremap("'", "''<left>")
 --inoremap("`", "``<left>")
 --inoremap('"', '""<left>')
-
-
-
-
