@@ -54,7 +54,11 @@ end)
 nnoremap(
 	"-",
 	function()
-		vim.cmd("Oil")
+		vim.cmd("vsplit")
+		require("oil").open()
+		if vim.api.nvim_win_get_width(0) > 50 then
+			vim.api.nvim_win_set_width(0, 50)
+		end
 	end,
 	{ desc = "Open parent directory" }
 )

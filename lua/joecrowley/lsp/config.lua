@@ -21,12 +21,18 @@ lspconfig.pyright.setup {
     settings = {
         pyright = {
             disableOrganizeImports = true,
+			openFilesOnly = true,
         },
         python = {
-            analysis = {
-                ignore = { '*' },
-            },
-        },
+			analysis = {
+				autoImportCompletions = false,
+				diagnosticMode = "openFilesOnly",
+				typeCheckingMode = "standard",
+				diagnosticSeverityOverrides = {
+					reportAttributeAccessIssue="warning",
+				},
+			}
+		},
     },
 }
 
@@ -43,7 +49,8 @@ lspconfig.pyright.setup {
 --                         "%f:%l:%c: %tarning: %m",
 --                         "%f:%l:%c: %tote: %m",
 --                     },
--- 					lintDebounce = "15s",
+-- 					lintOnSave = true,
+-- 					lintSource = "mypy",
 --                 },
 --             }
 --         }
@@ -134,7 +141,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
         vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
         vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-        vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+        vim.keymap.set({'n', 'i', 'c'}, '<C-k>', vim.lsp.buf.signature_help, opts)
         vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
         vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
         vim.keymap.set('n', '<leader>wl', function()
