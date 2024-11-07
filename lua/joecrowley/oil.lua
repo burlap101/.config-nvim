@@ -59,7 +59,10 @@ require("oil").setup({
   -- See :help oil-actions for a list of all available actions
   keymaps = {
     ["g?"] = "actions.show_help",
-    ["<CR>"] = "actions.select",
+    ["<CR>"] = function()
+		require("oil.actions").select.callback()
+		vim.cmd("only")
+	end,
     ["<C-s>"] = { "actions.select", opts = { vertical = true }, desc = "Open the entry in a vertical split" },
     ["<C-h>"] = { "actions.select", opts = { horizontal = true }, desc = "Open the entry in a horizontal split" },
     ["<C-t>"] = { "actions.select", opts = { tab = true }, desc = "Open the entry in new tab" },
