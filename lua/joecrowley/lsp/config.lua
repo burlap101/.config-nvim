@@ -22,7 +22,7 @@ lspconfig.pyright.setup {
 	settings = {
 		pyright = {
 			disableOrganizeImports = true,
-			openFilesOnly = true,
+			openFilesOnly = false,
 		},
 		python = {
 			analysis = {

@@ -30,7 +30,7 @@ nnoremap("<leader>pf", function()
 end)
 
 nnoremap("<leader>ps", function()
-	telescope_builtin.grep_string { search = vim.fn.input("Grep for > ")}
+	telescope_builtin.grep_string { search = vim.fn.input("Grep for > "), hidden = true}
 end)
 
 nnoremap("<leader>pk", function()
