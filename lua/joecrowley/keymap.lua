@@ -151,6 +151,7 @@ nnoremap(
 
 -- DAP
 local dap = require('dap')
+local dap_python = require('dap-python')
 
 nnoremap(
 	"<leader>b",
@@ -194,6 +195,11 @@ nnoremap(
 	{ desc = "DAP: Terminate session" }
 )
 
+nnoremap(
+	"<F3>",
+	function() dap_python.test_method() end,
+	{ desc = "DAP: Test method" }
+)
 
 -- autobracketing hack
 

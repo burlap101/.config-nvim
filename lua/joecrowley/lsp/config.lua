@@ -66,26 +66,28 @@ lspconfig.lua_ls.setup {
                 return
             end
         end
-
-        client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
-            runtime = {
-                -- Tell the language server which version of Lua you're using
-                -- (most likely LuaJIT in the case of Neovim)
-                version = 'LuaJIT'
-            },
-            -- Make the server aware of Neovim runtime files
-            workspace = {
-                checkThirdParty = false,
-                library = {
-                    vim.env.VIMRUNTIME
-                    -- Depending on the usage, you might want to add additional paths here.
-                    -- "${3rd}/luv/library"
-                    -- "${3rd}/busted/library",
-                }
-                -- or pull in all of 'runtimepath'. NOTE: this is a lot slower and will cause issues when working on your own configuration (see https://github.com/neovim/nvim-lspconfig/issues/3189)
-                -- library = vim.api.nvim_get_runtime_file("", true)
-            }
-        })
+		-- Check to see if working on neovim conf
+		if not string.match(vim.uv.cwd() or "", "/home/.*%.config/nvim") then
+			client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+				runtime = {
+					version = 'Lua 5.4',
+					path = {
+						'?.lua',
+						'?/init.lua',
+						vim.fn.expand'~/.luarocks/share/lua/5.4/?.lua',
+						vim.fn.expand'~/.luarocks/share/lua/5.4/?/init.lua',
+						'/usr/share/5.4/?.lua',
+						'/usr/share/5.4/?/init.lua'
+					},
+				},
+				workspace = {
+					library = {
+						vim.fn.expand'~/.luarocks/share/lua/5.4',
+						'/usr/share/lua/5.4'
+					}
+				}
+			})
+		end
     end,
     settings = {
         Lua = {
@@ -97,7 +99,7 @@ lspconfig.lua_ls.setup {
 }
 lspconfig.tailwindcss.setup {}
 lspconfig.volar.setup {}
-lspconfig.tsserver.setup {}
+--lspconfig.tsserver.setup {}
 lspconfig.ruff.setup {
     init_options = {
         settings = {
@@ -126,13 +128,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
         -- Enable completion triggered by <c-x><c-o>
         vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
         local client = vim.lsp.get_client_by_id(ev.data.client_id)
-        print(client.name, 'attached')
-
-        if client.name == "hls" then
-            vim.bo[ev.buf].tabstop = 8
-            vim.bo[ev.buf].softtabstop = 2
-            vim.bo[ev.buf].shiftwidth = 2
-        end
+		if client then
+			print(client.name, 'attached')
+			if client.name == "hls" then
+				vim.bo[ev.buf].tabstop = 8
+				vim.bo[ev.buf].softtabstop = 2
+				vim.bo[ev.buf].shiftwidth = 2
+			end
+		end
 
         -- Buffer local mappings.
         -- See `:help vim.lsp.*` for documentation on any of the below functions

@@ -61,17 +61,17 @@ require("oil").setup({
 	-- See :help oil-actions for a list of all available actions
 	keymaps = {
 		["g?"] = "actions.show_help",
-		["<CR>"] = {
-			"actions.select",
-			opts = {
-				callback = function()
-					local ft = vim.filetype.match({ buf = 0 })
+		["<CR>"] = function()
+			require("oil").select(
+				{},
+				function(_)
+					local ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
 					if ft ~= "oil" then
 						vim.cmd("only")
 					end
 				end
-			}
-		},
+			)
+		end,
 		["<C-s>"] = { "actions.select", opts = { vertical = true }, desc = "Open the entry in a vertical split" },
 		["<C-h>"] = { "actions.select", opts = { horizontal = true }, desc = "Open the entry in a horizontal split" },
 		["<C-t>"] = { "actions.select", opts = { tab = true }, desc = "Open the entry in new tab" },

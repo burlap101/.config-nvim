@@ -1,5 +1,5 @@
 local cmp = require("cmp")
-local luasnip = require("luasnip")
+local ls = require("luasnip")
 
 require("luasnip/loaders/from_vscode").lazy_load()
 
@@ -10,38 +10,38 @@ end
 
 -- some other good icons
 local kind_icons = {
-    Text = "󰉿",
-    Method = "󰆧",
-    Function = "󰊕",
-    Constructor = "",
-    Field = "󰜢",
-    Variable = "󰀫",
-    Class = "󰠱",
-    Interface = "",
-    Module = "",
-    Property = "󰜢",
-    Unit = "󰑭",
-    Value = "󰎠",
-    Enum = "",
-    Keyword = "󰌋",
-    Snippet = "",
-    Color = "󰏘",
-    File = "󰈙",
-    Reference = "󰈇",
-    Folder = "󰉋",
-    EnumMember = "",
-    Constant = "󰏿",
-    Struct = "󰙅",
-    Event = "",
-    Operator = "󰆕",
-    TypeParameter = "",
+	Text = "󰉿",
+	Method = "󰆧",
+	Function = "󰊕",
+	Constructor = "",
+	Field = "󰜢",
+	Variable = "󰀫",
+	Class = "󰠱",
+	Interface = "",
+	Module = "",
+	Property = "󰜢",
+	Unit = "󰑭",
+	Value = "󰎠",
+	Enum = "",
+	Keyword = "󰌋",
+	Snippet = "",
+	Color = "󰏘",
+	File = "󰈙",
+	Reference = "󰈇",
+	Folder = "󰉋",
+	EnumMember = "",
+	Constant = "󰏿",
+	Struct = "󰙅",
+	Event = "",
+	Operator = "󰆕",
+	TypeParameter = "",
 }
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
 cmp.setup {
 	snippet = {
 		expand = function(args)
-			luasnip.lsp_expand(args.body) -- For `luasnip` users.
+			ls.lsp_expand(args.body) -- For `luasnip` users.
 		end,
 	},
 	window = {
@@ -67,10 +67,10 @@ cmp.setup {
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
-			elseif luasnip.expandable() then
-				luasnip.expand()
-			elseif luasnip.expand_or_jumpable() then
-				luasnip.expand_or_jump()
+			elseif ls.expandable() then
+				ls.expand()
+			elseif ls.expand_or_jumpable() then
+				ls.expand_or_jump()
 			elseif check_backspace() then
 				fallback()
 			else
@@ -79,11 +79,19 @@ cmp.setup {
 		end, {
 			"s",
 		}),
+		["<C-n>"] = cmp.mapping(function()
+			if ls.expand_or_jumpable() then
+				ls.expand_or_jump()
+			end
+		end, {
+			"s",
+			"i",
+		}),
 		["<S-Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_prev_item()
-			elseif luasnip.jumpable(-1) then
-				luasnip.jump(-1)
+			elseif ls.jumpable(-1) then
+				ls.jump(-1)
 			else
 				fallback()
 			end
@@ -126,3 +134,30 @@ cmp.setup {
 		native_menu = false,
 	},
 }
+
+-- Custom snippets
+local s = ls.snippet
+local i = ls.insert_node
+local fmt = require("luasnip.extras.fmt")
+local events = require("luasnip.util.events")
+
+ls.add_snippets("lua", {
+	s(
+		'lu = require("luaunit") ...',
+		fmt.fmt('local lu = require("luaunit")\n\n{}\n\nos.exit(lu.LuaUnit.run())', { i(0) }),
+		{
+			callbacks = {
+				[-1] = {
+					[events.pre_expand] = function(node, _event_args) vim.api.nvim_del_current_line() end
+				}
+			}
+		}
+	),
+})
+
+ls.add_snippets("python", {
+	s(
+		'x for x in xs if cond',
+		fmt.fmt('{} for {} in {} if {}', { i(1, "x"), i(2, "x"), i(3, "xs"), i(0, "cond") })
+	)
+})
