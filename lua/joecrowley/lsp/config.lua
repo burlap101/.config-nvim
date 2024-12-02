@@ -68,26 +68,28 @@ lspconfig.lua_ls.setup {
 				return
 			end
 		end
-
-		client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
-			runtime = {
-				-- Tell the language server which version of Lua you're using
-				-- (most likely LuaJIT in the case of Neovim)
-				version = 'LuaJIT'
-			},
-			-- Make the server aware of Neovim runtime files
-			workspace = {
-				checkThirdParty = false,
-				library = {
-					vim.env.VIMRUNTIME
-					-- Depending on the usage, you might want to add additional paths here.
-					-- "${3rd}/luv/library"
-					-- "${3rd}/busted/library",
+		-- Check to see if working on neovim conf
+		if not string.match(vim.uv.cwd() or "", "/home/.*%.config/nvim") then
+			client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+				runtime = {
+					version = 'Lua 5.4',
+					path = {
+						'?.lua',
+						'?/init.lua',
+						vim.fn.expand'~/.luarocks/share/lua/5.4/?.lua',
+						vim.fn.expand'~/.luarocks/share/lua/5.4/?/init.lua',
+						'/usr/share/5.4/?.lua',
+						'/usr/share/5.4/?/init.lua'
+					},
+				},
+				workspace = {
+					library = {
+						vim.fn.expand'~/.luarocks/share/lua/5.4',
+						'/usr/share/lua/5.4'
+					}
 				}
-				-- or pull in all of 'runtimepath'. NOTE: this is a lot slower and will cause issues when working on your own configuration (see https://github.com/neovim/nvim-lspconfig/issues/3189)
-				-- library = vim.api.nvim_get_runtime_file("", true)
-			}
-		})
+			})
+		end
 	end,
 	settings = {
 		Lua = {
