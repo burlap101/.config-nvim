@@ -41,9 +41,13 @@ autocmd('TextYankPost', {
 })
 
 -- Delete all buffers except current
-nnoremap("<leader>bo", function()
-	vim.cmd("%bdelete!|edit #|normal `")
-end)
+nnoremap(
+	"<leader>bo",
+	function()
+		vim.cmd("%bdelete!|edit #|normal `")
+	end,
+	{ desc = "Delete all buffers except current" }
+)
 
 -- Fugitive
 nnoremap("<leader>gj", function()
@@ -148,6 +152,14 @@ nnoremap(
 	end,
 	{ desc = "Telescope: Fuzzy find in current buffer" }
 )
+nnoremap(
+	"<leader>u",
+	function()
+		vim.cmd("Telescope undo")
+	end,
+	{ desc = "Telescope: Undo" }
+)
+
 
 -- DAP
 local dap = require('dap')

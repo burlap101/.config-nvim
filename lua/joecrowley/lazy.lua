@@ -4,12 +4,16 @@ require("lazy").setup({
 		dependencies = 'nvim-lua/plenary.nvim'
 	},
 	'tpope/vim-fugitive',
-	'nvim-lua/plenary.nvim',
 	'nvim-lua/popup.nvim',
-	'nvim-telescope/telescope.nvim',
+	{
+		'nvim-telescope/telescope.nvim',
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+	},
 	{ 'nvim-treesitter/nvim-treesitter', build = ":TSUpdate" },
-	'nvim-treesitter/playground',
-	'p00f/nvim-ts-rainbow',
+	--'nvim-treesitter/playground',
+	--'p00f/nvim-ts-rainbow',
 	'Pocco81/auto-save.nvim',
 	{
 		'stevearc/oil.nvim',

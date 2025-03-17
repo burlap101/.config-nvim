@@ -9,5 +9,6 @@ require('joecrowley.model-nvim')
 require('joecrowley.cmp')
 require('joecrowley.lualine')
 require('joecrowley.treesitter')
+require('joecrowley.telescope')
 require('joecrowley.dap')
 

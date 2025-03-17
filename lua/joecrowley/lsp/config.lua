@@ -59,6 +59,9 @@ lspconfig.efm.setup {
     }
 }
 lspconfig.jsonls.setup {}
+lspconfig.tsserver.setup {
+	cmd = { "typescript-language-server", "--stdio" }
+}
 lspconfig.svelte.setup {}
 lspconfig.lua_ls.setup {
 	on_init = function(client)
