@@ -38,30 +38,29 @@ lspconfig.pyright.setup {
 	rootMarkers = { ".git", "pyproject.toml" },
 }
 
-lspconfig.efm.setup {
-    init_options = { documentFormatting = false },
-    settings = {
-        rootMarkers = { ".venv/", ".git/" },
-        languages = {
-            python = {
-                {
-                    lintCommand = "mypy --show-column-numbers",
-                    lintFormats = {
-                        "%f:%l:%c: %trror: %m",
-                        "%f:%l:%c: %tarning: %m",
-                        "%f:%l:%c: %tote: %m",
-                    },
-					lintOnSave = true,
-					lintSource = "mypy",
-                },
-            }
-        }
-    }
+-- EFM lang server using efmls configs
+local eslint = require('efmls-configs.linters.eslint')
+local prettier = require('efmls-configs.formatters.prettier')
+local languages = {
+	typescript = { eslint, prettier },
+	javascript = { eslint, prettier },
 }
+
+local efmls_config = {
+	filetypes = vim.tbl_keys(languages),
+	settings = {
+		rootMarkers = { '.git/' },
+		languages = languages,
+	},
+	init_options = {
+		documentFormatting = true,
+		documentRangeFormatting = true,
+
+	},
+}
+lspconfig.efm.setup(efmls_config);
+
 lspconfig.jsonls.setup {}
-lspconfig.tsserver.setup {
-	cmd = { "typescript-language-server", "--stdio" }
-}
 lspconfig.svelte.setup {}
 lspconfig.lua_ls.setup {
 	on_init = function(client)
@@ -79,15 +78,15 @@ lspconfig.lua_ls.setup {
 					path = {
 						'?.lua',
 						'?/init.lua',
-						vim.fn.expand'~/.luarocks/share/lua/5.4/?.lua',
-						vim.fn.expand'~/.luarocks/share/lua/5.4/?/init.lua',
+						vim.fn.expand '~/.luarocks/share/lua/5.4/?.lua',
+						vim.fn.expand '~/.luarocks/share/lua/5.4/?/init.lua',
 						'/usr/share/5.4/?.lua',
 						'/usr/share/5.4/?/init.lua'
 					},
 				},
 				workspace = {
 					library = {
-						vim.fn.expand'~/.luarocks/share/lua/5.4',
+						vim.fn.expand '~/.luarocks/share/lua/5.4',
 						'/usr/share/lua/5.4'
 					}
 				}
@@ -104,7 +103,9 @@ lspconfig.lua_ls.setup {
 }
 lspconfig.tailwindcss.setup {}
 lspconfig.volar.setup {}
---lspconfig.tsserver.setup {}
+
+
+
 lspconfig.ruff.setup {
 	init_options = {
 		settings = {
@@ -115,6 +116,35 @@ lspconfig.ruff.setup {
 }
 
 lspconfig.biome.setup {}
+
+-- Helper function to check if a dependency exists in the project's node_modules
+local function is_dependency_installed(dependency)
+	local cwd = vim.fn.getcwd()
+	local package_json_path = cwd .. '/package.json'
+	if vim.fn.filereadable(package_json_path) == 0 then
+		return false
+	end
+
+	local package_json = vim.fn.json_decode(vim.fn.readfile(package_json_path))
+	local dev_dependencies = package_json.devDependencies or {}
+	local dependencies = package_json.dependencies or {}
+
+	return dev_dependencies[dependency] ~= nil or dependencies[dependency] ~= nil
+end
+
+-- Configure tsserver
+lspconfig.ts_ls.setup {
+	---comment
+	---@param client vim.lsp.Client
+	---@param bufnr integer
+	on_attach = function(client, bufnr)
+		-- Disable tsserver formatting if prettier or biome is present
+		if is_dependency_installed('prettier') or is_dependency_installed('biome') then
+			client.server_capabilities.documentFormattingProvider = false
+			client.server_capabilities.documentRangeFormattingProvider = false
+		end
+	end,
+}
 
 -- SVELTE GLOBAL
 vim.g.vim_svelte_plugin_use_typescript = 1
@@ -130,11 +160,11 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
 vim.api.nvim_create_autocmd('LspAttach', {
-    group = vim.api.nvim_create_augroup('UserLspConfig', {}),
-    callback = function(ev)
-        -- Enable completion triggered by <c-x><c-o>
-        vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-        local client = vim.lsp.get_client_by_id(ev.data.client_id)
+	group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+	callback = function(ev)
+		-- Enable completion triggered by <c-x><c-o>
+		vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+		local client = vim.lsp.get_client_by_id(ev.data.client_id)
 		if client then
 			print(client.name, 'attached')
 			if client.name == "hls" then

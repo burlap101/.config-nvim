@@ -23,8 +23,14 @@ require("lazy").setup({
 		-- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
 	},
 
+
 	-- lsp and cmp
 	'neovim/nvim-lspconfig',
+	{
+		'creativenull/efmls-configs-nvim',
+		version = 'v1.x.x', -- version is optional, but recommended
+		dependencies = { 'neovim/nvim-lspconfig' },
+	},
 	{
 		'hrsh7th/nvim-cmp',
 		dependencies = {
@@ -36,7 +42,7 @@ require("lazy").setup({
 			"saadparwaiz1/cmp_luasnip",
 		}
 	},
-	'williamboman/nvim-lsp-installer',
+	'williamboman/mason.nvim',
 	{ 'leafOfTree/vim-svelte-plugin',    run = ":TSInstall css" },
 
 
@@ -55,41 +61,4 @@ require("lazy").setup({
 	'theHamsta/nvim-dap-virtual-text',
 	'leoluz/nvim-dap-go',
 	{ 'folke/neodev.nvim', opts = {} }, -- provides type checking for dap
-
-	-- LLM
-	{
-		'gsuuon/model.nvim',
-
-		-- Don't need these if lazy = false
-		cmd = { 'M', 'Model', 'Mchat' },
-		init = function()
-			vim.filetype.add({
-				extension = {
-					mchat = 'mchat',
-				}
-			})
-		end,
-		ft = 'mchat',
-
-		keys = {
-			{ '<C-m>d',       ':Mdelete<cr>', mode = 'n' },
-			{ '<C-m>s',       ':Mselect<cr>', mode = 'n' },
-			{ '<C-m><space>', ':Mchat<cr>',   mode = 'n' }
-		},
-
-		-- To override defaults add a config field and call setup()
-
-		-- config = function()
-		--   require('model').setup({
-		--     prompts = {..},
-		--     chats = {..},
-		--     ..
-		--   })
-		--
-		--   require('model.providers.llamacpp').setup({
-		--     binary = '~/path/to/server/binary',
-		--     models = '~/path/to/models/directory'
-		--   })
-		--end
-	}
 })
