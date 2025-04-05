@@ -43,6 +43,7 @@ require("lazy").setup({
 		}
 	},
 	'williamboman/mason.nvim',
+	'williamboman/mason-lspconfig.nvim',
 	{ 'leafOfTree/vim-svelte-plugin',    run = ":TSInstall css" },
 
 

@@ -1,0 +1,5 @@
+require("joecrowley.lsp.configs.efm_ls")
+require("joecrowley.lsp.configs.haskell")
+require("joecrowley.lsp.configs.javascript")
+require("joecrowley.lsp.configs.lua_ls")
+require("joecrowley.lsp.configs.python")

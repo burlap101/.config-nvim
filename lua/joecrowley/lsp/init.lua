@@ -1,4 +1,4 @@
 require("mason").setup()
-require("joecrowley.lsp.sparql-ls")
+require("mason-lspconfig").setup()
+require("joecrowley.lsp.configs")
 require("joecrowley.lsp.config")
--- require("joecrowley.lsp.metals")
