@@ -3,12 +3,29 @@ local vim = vim
 local nnoremap = function(lhs, rhs, opts)
 	vim.keymap.set('n', lhs, rhs, opts or {})
 end
+local autocmd = vim.api.nvim_create_autocmd
+local augroup = vim.api.nvim_create_augroup
 
 -- vim.keymap.set('n', "<leader>u", vim.cmd("UndotreeShow"))
+-- Yanking
 vim.keymap.set('n', "Y", "y$")
 vim.keymap.set({ 'n', 'v' }, "<leader>y", "\"+y")
 vim.keymap.set('n', "<leader>Y", '"+yy')
 vim.keymap.set('n', "<leader>p", '"+p')
+local yank_group = augroup('HighlightYank', {})
+
+autocmd('TextYankPost', {
+	group = yank_group,
+	pattern = '*',
+	callback = function()
+		vim.highlight.on_yank({
+			higroup = 'IncSearch',
+			timeout = 40,
+		})
+	end,
+})
+
+-- Resizing
 nnoremap(
 	"<leader>+",
 	function() vim.cmd("vertical resize +5") end,
@@ -24,21 +41,6 @@ nnoremap(
 	function() return vim.api.nvim_buf_delete(0, {}) end,
 	{ desc = "Close current buffer" }
 )
-
-local autocmd = vim.api.nvim_create_autocmd
-local augroup = vim.api.nvim_create_augroup
-local yank_group = augroup('HighlightYank', {})
-
-autocmd('TextYankPost', {
-	group = yank_group,
-	pattern = '*',
-	callback = function()
-		vim.highlight.on_yank({
-			higroup = 'IncSearch',
-			timeout = 40,
-		})
-	end,
-})
 
 -- Delete all buffers except current
 nnoremap(
@@ -84,7 +86,7 @@ nnoremap(
 )
 
 nnoremap(
-	"<leader>pf",
+	"<leader>pj",
 	function()
 		telescope_builtin.find_files({
 			hidden = true,
