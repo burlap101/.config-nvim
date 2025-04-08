@@ -46,7 +46,6 @@ require("lazy").setup({
 	'williamboman/mason-lspconfig.nvim',
 	{ 'leafOfTree/vim-svelte-plugin',    run = ":TSInstall css" },
 
-
 	-- Themes
 	'folke/tokyonight.nvim',
 	{
