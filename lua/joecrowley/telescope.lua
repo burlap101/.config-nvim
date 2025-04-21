@@ -3,15 +3,6 @@ local actions_state = require("telescope.actions.state")
 local actions = require("telescope.actions")
 
 telescope.setup {
-	extensions = {
-		undo = {
-			side_by_side = true,
-			layout_strategy = "vertical",
-			layout_config = {
-				preview_height = 0.8,
-			},
-		}
-	},
 	defaults = {
 		mappings = {
 			i = {
@@ -34,5 +25,17 @@ telescope.setup {
 				end
 			}
 		}
-	}
+	},
+	extensions = {
+		undo = {
+			side_by_side = true,
+		--	layout_strategy = "vertical",
+			layout_config = {
+				preview_height = 0.8,
+				preview_width = 0.5,
+			},
+		}
+	},
 }
+
+telescope.load_extension("undo")

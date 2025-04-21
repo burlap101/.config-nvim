@@ -49,7 +49,15 @@ cmp.setup {
 		completion = cmp.config.window.bordered(),
 	},
 	mapping = {
-		--["<C-k>"] = cmp.mapping.select_prev_item(),
+		["<C-k>"] = cmp.mapping(function(fallback)
+			if cmp.visible_docs() then
+				cmp.close_docs()
+			elseif not cmp.visible_docs() then
+				cmp.open_docs()
+			else
+				fallback()
+			end
+		end, { "i", "c" }),
 		--["<C-j>"] = cmp.mapping.select_next_item(),
 		["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
 		["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
