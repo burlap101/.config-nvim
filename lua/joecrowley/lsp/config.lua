@@ -2,10 +2,14 @@ vim.diagnostic.config {
 	virtual_text = {
 		prefix = "●",
 		spacing = 4,
+		source = true,
 	},
 	signs = true,
 	underline = true,
 	update_in_insert = true,
+	float = {
+		source = true,
+	}
 }
 
 -- Global mappings.
