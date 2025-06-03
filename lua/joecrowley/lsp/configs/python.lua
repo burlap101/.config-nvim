@@ -11,9 +11,6 @@ lspconfig.pyright.setup {
 				autoImportCompletions = false,
 				diagnosticMode = "openFilesOnly",
 				typeCheckingMode = "off",
-				diagnosticSeverityOverrides = {
-					reportAttributeAccessIssue = "warning",
-				},
 			}
 		},
 	},

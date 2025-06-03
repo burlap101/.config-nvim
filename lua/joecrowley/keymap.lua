@@ -154,6 +154,16 @@ nnoremap(
 	end,
 	{ desc = "Telescope: Fuzzy find in current buffer" }
 )
+
+nnoremap(
+	"<leader>pr",
+	function()
+		telescope_builtin.resume()
+	end,
+	{ desc = "Telescope: Resume previous picker and state" }
+)
+
+
 nnoremap(
 	"<leader>u",
 	function()

@@ -15,11 +15,16 @@ local function generate_efm_config()
 	biome_f = vim.tbl_deep_extend('force', biome_f, {
 		formatCommand = myBiomeCmd(),
 	})
+
+	-- Python linter/formatters
 	local mypy = require('efmls-configs.linters.mypy')
+	local flake8 = require('efmls-configs.linters.flake8')
+	local black = require('efmls-configs.formatters.black')
+
 	local languages = {
 		typescript = { eslint, prettier, biome_f },
 		javascript = { eslint, prettier, biome_f },
-		python = { mypy },
+		python = { mypy, flake8, black },
 	}
 
 
