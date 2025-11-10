@@ -7,7 +7,7 @@ vim.opt_local.autoindent = true
 -- Debugging setup
 local dap_python = require('dap-python')
 
-dap_python.setup('$HOME/.venvs/debugpy/bin/python')
+dap_python.setup('.venv/bin/python')
 dap_python.test_runner = 'pytest'
 
 vim.keymap.set("n", "<F3>", function()
