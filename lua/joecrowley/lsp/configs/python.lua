@@ -14,7 +14,7 @@ lspconfig.pyright.setup {
 			}
 		},
 	},
-	rootMarkers = { ".git", "pyproject.toml" },
+	rootMarkers = { ".git/", "pyproject.toml", ".venv/" },
 }
 
 lspconfig.ruff.setup {
