@@ -54,6 +54,11 @@ require("lazy").setup({
 		dependencies = { 'kyazdani42/nvim-web-devicons', opt = true }
 	},
 	{ 'rose-pine/neovim',     name = 'rose-pine' },
+    {
+        "chaserensberger/christmas.nvim",
+        name = "christmas",
+        lazy = false,
+    },
 
 	-- DAP
 	'mfussenegger/nvim-dap',
