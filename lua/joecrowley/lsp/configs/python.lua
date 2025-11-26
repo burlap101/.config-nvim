@@ -1,6 +1,4 @@
-local lspconfig = require("lspconfig")
-
-lspconfig.pyright.setup {
+vim.lsp.config("pyright", {
 	settings = {
 		pyright = {
 			disableOrganizeImports = true,
@@ -15,15 +13,18 @@ lspconfig.pyright.setup {
 		},
 	},
 	rootMarkers = { ".git/", "pyproject.toml", ".venv/" },
-}
+})
 
-lspconfig.ruff.setup {
+vim.lsp.config("ruff", {
 	init_options = {
 		settings = {
 			configuration = "pyproject.toml",
 			configurationPreferences = "filesystemFirst",
 		}
 	}
-}
+})
+
+vim.lsp.enable("pyright", true)
+vim.lsp.enable("ruff", true)
 
 

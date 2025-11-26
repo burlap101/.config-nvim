@@ -1,4 +1,3 @@
-local lspconfig = require("lspconfig")
 local fs = require("efmls-configs.fs")
 
 -- EFM lang server using efmls configs
@@ -40,5 +39,5 @@ local function generate_efm_config()
 		},
 	}
 end
-
-lspconfig.efm.setup(generate_efm_config());
+vim.lsp.config("efm", generate_efm_config())
+vim.lsp.enable("efm", true)

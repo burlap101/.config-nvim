@@ -1,42 +1,33 @@
-local lspconfig = require("lspconfig")
+vim.lsp.config("lua_ls", {
+    on_init = function(client)
+        local root = client.workspace_folders and client.workspace_folders[1].name or vim.uv.cwd()
 
-lspconfig.lua_ls.setup {
-	on_init = function(client)
-		if client.workspace_folders then
-			local path = client.workspace_folders[1].name
-			if vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc') then
-				return
-			end
-		end
-		-- Check to see if working on neovim conf
-		if not string.match(vim.uv.cwd() or "", "/home/.*%.config/nvim") then
-			client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
-				runtime = {
-					version = 'Lua 5.4',
-					path = {
-						'?.lua',
-						'?/init.lua',
-						vim.fn.expand '~/.luarocks/share/lua/5.4/?.lua',
-						vim.fn.expand '~/.luarocks/share/lua/5.4/?/init.lua',
-						'/usr/share/5.4/?.lua',
-						'/usr/share/5.4/?/init.lua'
-					},
-				},
-				workspace = {
-					library = {
-						vim.fn.expand '~/.luarocks/share/lua/5.4',
-						'/usr/share/lua/5.4'
-					}
-				}
-			})
-		end
-	end,
-	settings = {
-		Lua = {
-			diagnostics = {
-				disable = { "missing-fields" },
-			}
-		}
-	}
-}
+        -- Skip if project has its own .luarc.json
+        if vim.uv.fs_stat(root .. "/.luarc.json") or vim.uv.fs_stat(root .. "/.luarc.jsonc") then
+            return
+        end
 
+        if root:match(vim.fn.stdpath("config")) then
+            -- Just add vim to globals, don't replace diagnostics
+            local diag = client.config.settings.Lua.diagnostics or {}
+            diag.globals = vim.list_extend(diag.globals or {}, { "vim" })
+            client.config.settings.Lua.diagnostics = diag
+
+            -- Add Neovim runtime for completion
+            client.config.settings.Lua.workspace = {
+                library = vim.api.nvim_get_runtime_file("", true),
+                checkThirdParty = false,
+            }
+            client.config.settings.Lua.runtime = { version = "LuaJIT" }
+        end
+    end,
+    settings = {
+        Lua = {
+            diagnostics = {
+                disable = { "missing-fields" }, -- your existing default
+            },
+        },
+    },
+})
+
+vim.lsp.enable("lua_ls", true)

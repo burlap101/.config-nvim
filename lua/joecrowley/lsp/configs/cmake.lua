@@ -1,3 +1,1 @@
-local lspconfig = require("lspconfig")
-
-lspconfig.neocmake.setup {}
+vim.lsp.enable("neocmake", true)

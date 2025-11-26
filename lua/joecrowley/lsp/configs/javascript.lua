@@ -1,5 +1,3 @@
-local lspconfig = require("lspconfig")
-
 -- Helper function to check if a dependency exists in the project's node_modules
 local function is_dependency_installed(dependency)
 	local cwd = vim.fn.getcwd()
@@ -16,7 +14,7 @@ local function is_dependency_installed(dependency)
 end
 
 -- Configure tsserver
-lspconfig.ts_ls.setup {
+vim.lsp.config("ts_ls", {
 	---Disable formatting for ts_ls if certain formatters installed
 	---@param client vim.lsp.Client
 	on_attach = function(client)
@@ -26,6 +24,7 @@ lspconfig.ts_ls.setup {
 			client.server_capabilities.documentRangeFormattingProvider = false
 		end
 	end,
-}
+})
 
-lspconfig.biome.setup {}
+vim.lsp.enable("ts_ls", true)
+vim.lsp.enable("biome", true)

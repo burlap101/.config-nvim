@@ -1,6 +1,4 @@
-local lspconfig = require("lspconfig")
-
-lspconfig.rust_analyzer.setup {
+vim.lsp.config("rust_analyzer", {
     settings = {
         -- The following entered in to deal with shared workspaces
         ["rust-analyzer"] = {
@@ -14,4 +12,6 @@ lspconfig.rust_analyzer.setup {
             },
         }
     }
-}
+})
+
+vim.lsp.enable("rust_analyzer", true)

@@ -1,3 +1,1 @@
-local lspconfig = require "lspconfig"
-
-lspconfig.gh_actions_ls.setup {}
+vim.lsp.enable("gh_actions_ls", true)
