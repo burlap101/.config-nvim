@@ -21,7 +21,8 @@ vim.lsp.config("ruff", {
 			configuration = "pyproject.toml",
 			configurationPreferences = "filesystemFirst",
 		}
-	}
+	},
+    rootMarkers = { ".git/", "pyproject.toml", ".venv/" },
 })
 
 vim.lsp.enable("pyright", true)

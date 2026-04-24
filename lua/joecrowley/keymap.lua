@@ -79,7 +79,8 @@ nnoremap(
 	"<C-p>",
 	function()
 		telescope_builtin.git_files({
-			show_untracked = true
+			show_untracked = true,
+            use_git_root = false,
 		})
 	end,
 	{ desc = "Telescope: Find files within repo" }
