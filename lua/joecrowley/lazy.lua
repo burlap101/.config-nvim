@@ -46,6 +46,8 @@ require("lazy").setup({
 	'williamboman/mason.nvim',
 	'williamboman/mason-lspconfig.nvim',
 	{ 'leafOfTree/vim-svelte-plugin',    run = ":TSInstall css" },
+    { 'Aietes/esp32.nvim'},
+
 
 	-- Themes
 	'folke/tokyonight.nvim',
@@ -54,11 +56,7 @@ require("lazy").setup({
 		dependencies = { 'kyazdani42/nvim-web-devicons', opt = true }
 	},
 	{ 'rose-pine/neovim',     name = 'rose-pine' },
-    {
-        "chaserensberger/christmas.nvim",
-        name = "christmas",
-        lazy = false,
-    },
+    { 'rebelot/kanagawa.nvim' },
 
 	-- DAP
 	'mfussenegger/nvim-dap',
