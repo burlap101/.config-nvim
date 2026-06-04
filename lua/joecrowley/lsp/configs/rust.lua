@@ -5,10 +5,24 @@ vim.lsp.config("rust_analyzer", {
             cargo = {
                 autoreload = true,
                 allFeatures = true,
-                features = { "dev-tools" }
+                features = "all",
+                buildScripts = {
+                    enable = true,
+                },
             },
             procMacro = {
                 enable = true
+            },
+            check = {
+                command = "clippy",
+                extraArgs = { "--no-deps" },
+            },
+            workspace = {
+                symbol = {
+                    search = {
+                        scope = "workspace_and_dependencies",
+                    },
+                },
             },
         }
     }
