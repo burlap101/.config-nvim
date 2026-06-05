@@ -9,6 +9,7 @@ vim.lsp.config("rust_analyzer", {
                 buildScripts = {
                     enable = true,
                 },
+                loadOutDirsFromCheck = true,
             },
             procMacro = {
                 enable = true
