@@ -16,7 +16,7 @@ vim.lsp.config("rust_analyzer", {
             },
             check = {
                 command = "clippy",
-                extraArgs = { "--no-deps" },
+                extraArgs = { "--no-deps", "--", "-W", "clippy::manual_let_else" },
             },
             workspace = {
                 symbol = {
