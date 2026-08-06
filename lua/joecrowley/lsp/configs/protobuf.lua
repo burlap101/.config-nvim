@@ -9,7 +9,7 @@ end
 vim.lsp.config('buf_ls', {
     cmd = { 'buf', 'lsp', 'serve' },
     filetypes = { 'proto', 'buf-config' },
-    root_markers = root_marker(),
+    root_markers = { 'buf.yaml', '.git/' },
 })
 
 vim.lsp.enable("buf_ls", true)
