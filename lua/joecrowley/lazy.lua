@@ -75,4 +75,18 @@ require("lazy").setup({
     'theHamsta/nvim-dap-virtual-text',
     'leoluz/nvim-dap-go',
     { 'folke/neodev.nvim',    opts = {} }, -- provides type checking for dap
+    {
+        'ray-x/lsp_signature.nvim',
+        event = "InsertEnter",
+        opts = {
+            bind = true,
+            hint_enable = false,       -- no inline virtual text, just the floating window
+            floating_window = true,
+            floating_window_above_cur_line = true,
+            handler_opts = { border = "rounded" },
+            toggle_key = "<C-s>",      -- manually toggle the signature popup
+            select_signature_key = "<C-n>", -- cycle overloads
+            move_cursor_key = nil,
+        },
+    },
 })

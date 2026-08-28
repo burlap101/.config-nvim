@@ -239,3 +239,10 @@ nnoremap(
 --inoremap("'", "''<left>")
 --inoremap("`", "``<left>")
 --inoremap('"', '""<left>')
+
+-- Scratch pad
+nnoremap(
+	"<leader>s",
+	function() require('joecrowley.scratch').open() end,
+	{ desc = "Open scratch pad" }
+)

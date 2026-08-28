@@ -10,4 +10,5 @@ require('joecrowley.lualine')
 require('joecrowley.treesitter')
 require('joecrowley.telescope')
 require('joecrowley.dap')
+require('joecrowley.scratch')
 

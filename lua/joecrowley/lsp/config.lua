@@ -29,6 +29,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		local client = vim.lsp.get_client_by_id(ev.data.client_id)
 		if client then
 			print(client.name, 'attached')
+			-- floating signature hints as you type
+			require("lsp_signature").on_attach({
+				bind = true,
+				floating_window = true,
+				hint_enable = false,
+				handler_opts = { border = "rounded" },
+			}, ev.buf)
 		end
 
 		-- Buffer local mappings.
