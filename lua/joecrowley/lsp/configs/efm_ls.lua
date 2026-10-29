@@ -5,6 +5,10 @@ local function generate_efm_config()
 	local eslint = require('efmls-configs.linters.eslint')
 	local prettier = require('efmls-configs.formatters.prettier')
 	local biome_f = require('efmls-configs.formatters.biome')
+	local jq = {
+		formatCommand = 'jq .',
+		formatStdin = true,
+	}
 	local myBiomeCmd = function()
 		local formatter = 'npx @biomejs/biome'
 		local args = "check --apply --stdin-file-path '${INPUT}'"
@@ -23,6 +27,7 @@ local function generate_efm_config()
 	local languages = {
 		typescript = { eslint, prettier, biome_f },
 		javascript = { eslint, prettier, biome_f },
+		json = { jq },
 		python = { mypy, flake8, black },
 	}
 
